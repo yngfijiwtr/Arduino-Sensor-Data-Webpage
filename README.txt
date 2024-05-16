@@ -1,4 +1,4 @@
-Project designed by KoloKush or YngFijiWtr on Reddit
+Project designed by KoloKush
 
 Arduino Uno R4 Wifi used for testing
 
