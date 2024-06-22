@@ -22,3 +22,4 @@ Temperature sensor math provided by Elegoo.com
 (1) x Thermistor Rated for 10K Ohm Resistor 
  
  
+ 
