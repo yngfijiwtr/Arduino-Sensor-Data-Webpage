@@ -20,9 +20,6 @@ Temperature sensor math provided by Elegoo.com
 
 (1) x 10k ohm resistor
 (1) x Thermistor Rated for 10K Ohm Resistor
-(1) x 16x2 LCD Screen
-
-UPDATE: CODE ADDED FOR LCD SCREEN - WIRING SHOWS THIS TOO. Delete LCD Code if you don't want it, or Upload even if you don't have one installed
  
  
  
