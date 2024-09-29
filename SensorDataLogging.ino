@@ -79,18 +79,7 @@ void setup()
 }
 void loop()
 {
-  if(WiFi.status() != WL_CONNECTED){  //this solves the issue with the lease expiring
-    wifiStatus = 0;  //3 means connected, IDK what the keyword is for disconnected
-    while (wifiStatus != WL_CONNECTED) {
-      Serial.print("Attempting to connect to SSID: ");
-      Serial.println(ssid);
-      // Connect to WPA/WPA2 network. Change this line if using open or WEP network:
-      wifiStatus = WiFi.begin(ssid, pass);
-
-      // wait 10 seconds for connection:
-      delay(10000);
-    }
-  }
+  wifiReconnect();
   calcTemp();
   calcTime();
   setTempData();
@@ -377,6 +366,20 @@ void connectToWiFi(){
 
   Serial.println("Connected to WiFi");
   printWifiStatus();
+}
+void wifiReconnect(){
+  if(WiFi.status() != WL_CONNECTED){     //To prevent the Wifi Lease from expiring
+    wifiStatus = 0;                      //WL_CONNECTED = 3, didn't know the keyword for Disconnected
+    while (wifiStatus != WL_CONNECTED) {                //Actually Reconnects
+      Serial.print("Attempting to connect to SSID: ");
+      Serial.println(ssid);
+      // Connect to WPA/WPA2 network. Change this line if using open or WEP network:
+      wifiStatus = WiFi.begin(ssid, pass);
+
+      // wait 10 seconds for connection:
+      delay(10000);
+    }
+  }
 }
 void pullTimeFromWeb(){
   RTC.begin();
