@@ -1,7 +1,7 @@
 //Project by KoloKush
 
-//Include LCD and LED Tetris Matrix Libraries
-#include <LiquidCrystal.h>
+//Include LED Tetris Matrix Libraries
+
 #include "r4frames.h"
 #include "Arduino_LED_Matrix.h"
 
@@ -40,8 +40,6 @@ float tempF;
 ArduinoLEDMatrix matrix;       //on-board LED Matrix just for fun
 int tempPin = 0;
 
-LiquidCrystal lcd(7, 8, 9, 10, 11, 12);
-
 ///////please enter your sensitive data in the Secret tab/arduino_secrets.h
 char ssid[] = SECRET_SSID;        // your network SSID (name)
 char pass[] = SECRET_PASS;    // your network password (use for WPA, or use as key for WEP)
@@ -56,11 +54,6 @@ void setup()
 {
   runOnce[0] = 0;
   runOnce[1] = 0;
-  lcd.begin(16, 2);
-  lcd.setCursor(0, 0);
-  lcd.print("Connecting:");
-  lcd.setCursor(0, 1);
-  lcd.print("to Wifi & Server");
   // you can also load frames at runtime, without stopping the refresh
   matrix.loadSequence(frames);
   matrix.begin();       //ON-BOARD LED MATRIX DISPLAYING TETRIS AND A HEART, JUST FOR FUN!
@@ -128,21 +121,9 @@ void calcTemp(){
     float tempF = tempC * 9.0 / 5.0 + 32.0;
     Serial.println("Temp F: " + String(tempF));
   */
-  // Display Temperature in C
-  lcd.setCursor(0, 0);
-  //lcd.print("Temp         C  ");
-  // Display Temperature in F
-  lcd.print("Temp         F  ");
-  lcd.setCursor(6, 0);
-  // Display Temperature in C
-  //lcd.print(tempC);
-  // Display Temperature in F
-  lcd.print(tempF);
 }
 void calcTime(){
   RTC.getTime(currentTime);
-  lcd.setCursor(0, 1);
-  lcd.print(String(currentTime));
   delay(1000);
   hour = currentTime.getHour();
   minutes = currentTime.getMinutes();
