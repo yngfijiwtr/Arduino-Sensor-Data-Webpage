@@ -1,8 +1,6 @@
 //Project by KoloKush
 
 //Include LED Tetris Matrix Libraries
-
-#include "r4frames.h"
 #include "Arduino_LED_Matrix.h"
 
 // Include the RTC library
@@ -37,7 +35,6 @@ double tempK;
 float tempC;
 float tempF;
 
-ArduinoLEDMatrix matrix;       //on-board LED Matrix just for fun
 int tempPin = 0;
 
 ///////please enter your sensitive data in the Secret tab/arduino_secrets.h
@@ -55,11 +52,6 @@ void setup()
   runOnce[0] = 0;
   runOnce[1] = 0;
   // you can also load frames at runtime, without stopping the refresh
-  matrix.loadSequence(frames);
-  matrix.begin();       //ON-BOARD LED MATRIX DISPLAYING TETRIS AND A HEART, JUST FOR FUN!
-  // turn on autoscroll to avoid calling next() to show the next frame; the parameter is in milliseconds
-  // matrix.autoscroll(300);
-  matrix.play(true);
   pinMode(LED_BUILTIN, OUTPUT);
   Serial.begin(9600);
   while (!Serial);
