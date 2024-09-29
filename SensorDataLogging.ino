@@ -1,5 +1,10 @@
 //Project by KoloKush
 
+//Include LCD and LED Tetris Matrix Libraries
+#include <LiquidCrystal.h>
+#include "r4frames.h"
+#include "Arduino_LED_Matrix.h"
+
 // Include the RTC library
 #include "RTC.h"
 //Include the NTP library
@@ -13,7 +18,7 @@
 #endif
 
 //Include Network SSID and Password
-#include "arduino_secrets.h" 
+#include "arduino_secrets.h"
 
 float tempData[130];     //Array size big enough for testing 30 second intervals over an hour
 float prevData[130];
@@ -32,7 +37,10 @@ double tempK;
 float tempC;
 float tempF;
 
-int tempPin = 0;   //analog 0 input for temp reading
+ArduinoLEDMatrix matrix;       //on-board LED Matrix just for fun
+int tempPin = 0;
+
+LiquidCrystal lcd(7, 8, 9, 10, 11, 12);
 
 ///////please enter your sensitive data in the Secret tab/arduino_secrets.h
 char ssid[] = SECRET_SSID;        // your network SSID (name)
@@ -48,6 +56,18 @@ void setup()
 {
   runOnce[0] = 0;
   runOnce[1] = 0;
+  lcd.begin(16, 2);
+  lcd.setCursor(0, 0);
+  lcd.print("Connecting:");
+  lcd.setCursor(0, 1);
+  lcd.print("to Wifi & Server");
+  // you can also load frames at runtime, without stopping the refresh
+  matrix.loadSequence(frames);
+  matrix.begin();       //ON-BOARD LED MATRIX DISPLAYING TETRIS AND A HEART, JUST FOR FUN!
+  // turn on autoscroll to avoid calling next() to show the next frame; the parameter is in milliseconds
+  // matrix.autoscroll(300);
+  matrix.play(true);
+  pinMode(LED_BUILTIN, OUTPUT);
   Serial.begin(9600);
   while (!Serial);
 
@@ -68,12 +88,23 @@ void setup()
   RTC.setTime(timeToSet);
 
   // Retrieve the date and time from the RTC and print them
-  RTC.getTime(currentTime); 
+  RTC.getTime(currentTime);
   Serial.println("The RTC was just set to: " + String(currentTime));
   server.begin();
 }
 void loop()
 {
+  if(WiFi.status() != WL_CONNECTED){
+    while (wifiStatus != WL_CONNECTED) {
+      Serial.print("Attempting to connect to SSID: ");
+      Serial.println(ssid);
+      // Connect to WPA/WPA2 network. Change this line if using open or WEP network:
+      wifiStatus = WiFi.begin(ssid, pass);
+
+      // wait 10 seconds for connection:
+      delay(10000);
+    }
+  }
   calcTemp();
   calcTime();
   setTempData();
@@ -83,18 +114,35 @@ void calcTemp(){
   tempReading = analogRead(tempPin);
   //Temp Math from Arduino Kit
   // This is OK
+ // /*
   tempK = log(10000.0 * ((1024.0 / tempReading - 1)));
   tempK = 1 / (0.001129148 + (0.000234125 + (0.0000000876741 * tempK * tempK )) * tempK );       //  Temp Kelvin
   tempC = tempK - 273.15;            // Convert Kelvin to Celcius
   tempF = (tempC * 9.0)/ 5.0 + 32.0; // Convert Celcius to Fahrenheit
+ // float tempVolts = tempReading * 5.0 / 1024.0;
+ // Serial.println("Voltage: " + String(tempVolts));
+  //*/
   /*  replaced
     float tempVolts = tempReading * 5.0 / 1024.0;
     float tempC = (tempVolts - 0.5) * 10.0;
     float tempF = tempC * 9.0 / 5.0 + 32.0;
+    Serial.println("Temp F: " + String(tempF));
   */
+  // Display Temperature in C
+  lcd.setCursor(0, 0);
+  //lcd.print("Temp         C  ");
+  // Display Temperature in F
+  lcd.print("Temp         F  ");
+  lcd.setCursor(6, 0);
+  // Display Temperature in C
+  //lcd.print(tempC);
+  // Display Temperature in F
+  lcd.print(tempF);
 }
 void calcTime(){
   RTC.getTime(currentTime);
+  lcd.setCursor(0, 1);
+  lcd.print(String(currentTime));
   delay(1000);
   hour = currentTime.getHour();
   minutes = currentTime.getMinutes();
@@ -132,6 +180,12 @@ void setTempData(){          //Sets the data into the array one by one
   if ((minutes == 1) | (minutes == 31)){
   //if ((seconds == 1) | (seconds == 31)){    //for testing
     runOnce[0] = 0;
+    if(WiFi.status() == WL_CONNECTED){
+      Serial.println("Wifi is still connected...");
+    }
+    else{
+      Serial.println(WiFi.status());
+    }
   }
   if (hour == 1){
   //if (minutes == 1){    //for testing
