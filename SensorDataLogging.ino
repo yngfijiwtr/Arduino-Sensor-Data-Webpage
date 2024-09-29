@@ -379,6 +379,7 @@ void wifiReconnect(){
       // wait 10 seconds for connection:
       delay(10000);
     }
+    printWifiStatus();
   }
 }
 void pullTimeFromWeb(){
