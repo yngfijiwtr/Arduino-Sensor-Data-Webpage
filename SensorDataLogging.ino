@@ -79,8 +79,8 @@ void setup()
 }
 void loop()
 {
-  if(WiFi.status() != WL_CONNECTED){
-    wifiStatus = 0;
+  if(WiFi.status() != WL_CONNECTED){  //this solves the issue with the lease expiring
+    wifiStatus = 0;  //3 means connected, IDK what the keyword is for disconnected
     while (wifiStatus != WL_CONNECTED) {
       Serial.print("Attempting to connect to SSID: ");
       Serial.println(ssid);
