@@ -133,7 +133,7 @@ void setTempData(){          //Sets the data into the array one by one
         Serial.println("Wifi is still connected...");
       }
       else{
-        Serial.println(WiFi.status());
+        Serial.println("DISCONNECTED! Wifi Status Number: " + WiFi.status());
       }
     }
   }
