@@ -80,6 +80,7 @@ void setup()
 void loop()
 {
   if(WiFi.status() != WL_CONNECTED){
+    wifiStatus = 0;
     while (wifiStatus != WL_CONNECTED) {
       Serial.print("Attempting to connect to SSID: ");
       Serial.println(ssid);
