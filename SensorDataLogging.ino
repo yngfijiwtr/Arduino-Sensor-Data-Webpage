@@ -166,6 +166,12 @@ void setTempData(){          //Sets the data into the array one by one
       tempData[dataToday] = tempF;
       todayTime[dataToday] = timeString;
       dataToday++;
+      if(WiFi.status() == WL_CONNECTED){
+        Serial.println("Wifi is still connected...");
+      }
+      else{
+        Serial.println(WiFi.status());
+      }
     }
   }
   if ((hour == 0) && (runOnce[1] == 0) && (startup == false)){
@@ -180,12 +186,6 @@ void setTempData(){          //Sets the data into the array one by one
   if ((minutes == 1) | (minutes == 31)){
   //if ((seconds == 1) | (seconds == 31)){    //for testing
     runOnce[0] = 0;
-    if(WiFi.status() == WL_CONNECTED){
-      Serial.println("Wifi is still connected...");
-    }
-    else{
-      Serial.println(WiFi.status());
-    }
   }
   if (hour == 1){
   //if (minutes == 1){    //for testing
