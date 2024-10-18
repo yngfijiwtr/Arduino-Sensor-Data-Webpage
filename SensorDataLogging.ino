@@ -1,8 +1,5 @@
 //Project by KoloKush
 
-//Include LED Tetris Matrix Libraries
-#include "Arduino_LED_Matrix.h"
-
 // Include the RTC library
 #include "RTC.h"
 //Include the NTP library
@@ -42,8 +39,6 @@ char ssid[] = SECRET_SSID;        // your network SSID (name)
 char pass[] = SECRET_PASS;    // your network password (use for WPA, or use as key for WEP)
 
 IPAddress staticIP(10, 0, 0, 200); // Your desired static IP address
-IPAddress gateway(10, 0, 0, 1); // Your network gateway
-IPAddress subnet(255, 255, 255, 0); // Your subnet mask
 
 int wifiStatus = WL_IDLE_STATUS;
 WiFiServer server(80);
@@ -345,9 +340,7 @@ void printWifiStatus() {
 }
 
 void connectToWiFi(){
-  WiFi.config(staticIP, gateway, subnet);
-  Serial.print("Connected with IP: ");
-  Serial.println(WiFi.localIP());
+  WiFi.config(staticIP);
   // check for the WiFi module:
   if (WiFi.status() == WL_NO_MODULE) {
     Serial.println("Communication with WiFi module failed!");
@@ -376,9 +369,7 @@ void connectToWiFi(){
 }
 void wifiReconnect(){
   if(WiFi.status() != WL_CONNECTED){     //To prevent the Wifi Lease from expiring
-    WiFi.config(staticIP, gateway, subnet);
-    Serial.print("Connected with IP: ");
-    Serial.println(WiFi.localIP());
+    WiFi.config(staticIP);
     wifiStatus = 0;                      //WL_CONNECTED = 3, didn't know the keyword for Disconnected
     while (wifiStatus != WL_CONNECTED) {                //Actually Reconnects
       Serial.print("Attempting to connect to SSID: ");
