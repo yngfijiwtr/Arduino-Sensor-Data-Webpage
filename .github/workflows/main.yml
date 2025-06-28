@@ -2,7 +2,7 @@ name: CI
 
 on:
   schedule:
-    - cron: '*/30 * * * *'
+    - cron: '*/25 * * * *'
   workflow_dispatch:
 
 jobs:
@@ -15,17 +15,15 @@ jobs:
       - name: Configure Git
         run: |
           git config user.name "yngfijiwtr"
-          git config user.email "you@example.com"
+          git config user.email "yngfijiwtr@users.noreply.github.com"
 
       - name: Run a one-line script
         run: |
           echo " " >> README.md
           git add README.md
-          git commit -m "Automated Update"
+          git commit -m "Automated Update" || echo "Nothing to commit"
 
       - name: Push changes
-        env:
-          ACTIONS_PAT: ${{ secrets.ACTIONS_PAT }}
         run: |
-          git remote set-url origin https://yngfijiwtr:${{ secrets.ACTIONS_PAT }}@github.com/yngfijiwtr/Arduino-Sensor-Data-Webpage.git
+          git remote set-url origin https://yngfijiwtr@github.com/yngfijiwtr/DeskPal.git
           git push origin HEAD:main
