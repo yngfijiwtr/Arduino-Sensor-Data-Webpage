@@ -338,7 +338,6 @@ void printWifiStatus() {
   Serial.print("To see this page in action, open a browser to http://");
   Serial.println(ip);
 }
-
 void connectToWiFi(){
   WiFi.config(staticIP);
   // check for the WiFi module:
