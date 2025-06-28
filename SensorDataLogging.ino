@@ -66,7 +66,7 @@ void setup()
   // Get the current date and time from an NTP server and convert
   // it to UTC -7 by passing the time zone offset in hours.
   // You may change the time zone offset to your local one.
-  auto timeZoneOffsetHours = -7;
+  auto timeZoneOffsetHours = -7;       //Timezone Offset for Pacific Time in the USA
   auto unixTime = timeClient.getEpochTime() + (timeZoneOffsetHours * 3600);
   Serial.print("Unix time = ");
   Serial.println(unixTime);
