@@ -392,6 +392,7 @@ void pullTimeFromWeb(){
   // Get the current date and time from an NTP server and convert
   // it to UTC -7 by passing the time zone offset in hours.
   // You may change the time zone offset to your local one.
+
   auto timeZoneOffsetHours = -7;
   auto unixTime = timeClient.getEpochTime() + (timeZoneOffsetHours * 3600);
   Serial.print("Unix time = ");
