@@ -1,22 +1,27 @@
-Project designed by YngFijiWtr
+*Project designed by YngFijiWtr*
 
-Arduino Uno R4 Wifi used for testing
+**Arduino Sensor Data Logging**
 
-There are two pictures uploaded of the website
+- Arduino Uno R4 Wifi used for testing
 
-Sensor Data tracked over time displaying Today's data (every 30 minutes)
+- There are two pictures uploaded of the website
 
-and Yesterday's data
+- Sensor Data tracked over time displaying Today's data (every 30 minutes) and Yesterday's data
 
-Yesterday's data doesn't show up until it exists.
+- Yesterday's data doesn't show up until it exists.
 
-At midnight, the system pulls the time from the web and transfers data over to yesterday's graph
+- At midnight, the system pulls the time from the web and transfers data over to yesterday's graph
 
-Google Charts JS library used in the HTML
+**Credits**
 
-I referenced the Arduino website for Wifi and RTC code and took off from there.
+- Google Charts JS library used in the HTML
 
-Temperature sensor math provided by Elegoo.com
+- *I referenced the Arduino website for Wifi and RTC code and took off from there.*
 
+- Temperature sensor math provided by Elegoo.com
+
+**Parts Needed**
+
+(1) x Arduino board with Wifi Capability like the Uno R4
 (1) x 10k ohm resistor
 (1) x Thermistor Rated for 10K Ohm Resistor
