@@ -12,6 +12,8 @@
 
 - At midnight, the system pulls the time from the web and transfers data over to yesterday's graph
 
+- Check the Serial Monitor on the Arduino IDE for troubleshooting or status messages
+
 **Credits**
 
 - Google Charts JS library used in the HTML
