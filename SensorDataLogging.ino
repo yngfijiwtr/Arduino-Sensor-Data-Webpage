@@ -1,8 +1,8 @@
 //Project by YngFijiWtr
 
-// Include the RTC library
+// Include the Real Time Clock library
 #include "RTC.h"
-//Include the NTP library
+//Include the NTP library for pulling the time from the web
 #include <NTPClient.h>
 
 //Include the Wifi library
