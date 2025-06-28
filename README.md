@@ -1,6 +1,6 @@
 *Project designed by YngFijiWtr*
 
-**Arduino Sensor Data Logging**
+# Arduino Sensor Data Logging
 
 - Arduino Uno R4 Wifi used for testing
 
