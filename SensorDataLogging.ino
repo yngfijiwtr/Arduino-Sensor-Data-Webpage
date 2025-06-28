@@ -399,5 +399,3 @@ void pullTimeFromWeb(){
   RTC.getTime(currentTime); 
   Serial.println("The RTC was just set to: " + String(currentTime));
 }
-
-
