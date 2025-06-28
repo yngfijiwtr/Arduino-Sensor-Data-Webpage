@@ -347,23 +347,19 @@ void connectToWiFi(){
     // don't continue
     while (true);
   }
-
   String fv = WiFi.firmwareVersion();
   if (fv < WIFI_FIRMWARE_LATEST_VERSION) {
     Serial.println("Please upgrade the firmware");
   }
-
   // attempt to connect to WiFi network:
   while (wifiStatus != WL_CONNECTED) {
     Serial.print("Attempting to connect to SSID: ");
     Serial.println(ssid);
     // Connect to WPA/WPA2 network. Change this line if using open or WEP network:
     wifiStatus = WiFi.begin(ssid, pass);
-
     // wait 10 seconds for connection:
     delay(10000);
   }
-
   Serial.println("Connected to WiFi");
   printWifiStatus();
 }
