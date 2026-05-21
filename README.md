@@ -28,3 +28,4 @@
 (1) x 10k ohm resistor
 (1) x Thermistor Rated for 10K Ohm Resistor
  
+ 
